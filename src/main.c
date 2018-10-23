@@ -29,7 +29,7 @@ double trap(double a, double b, int n, double (*f)(double x));
 double sum(double a, double h, int n, double (*f)(double x));
 double g(double x);
 double h(double x);
-void display_output(double a, double b, double (*f)(double x));
+void display_area(double a, double b, double (*f)(double x));
 
 int main(void)
 {
@@ -45,11 +45,11 @@ int main(void)
 
   printf("\nArea of g(x) from x = 0.0 to x = 3.14159\n");
   printf("----------------------------------------");
-  display_output(0.0, 3.14159, g);
+  display_area(0.0, 3.14159, g);
 
   printf("\n\nArea of h(x) from x = -2.0 to x = 2.0\n");
   printf("-------------------------------------");
-  display_output(-2.0, 2.0, h);
+  display_area(-2.0, 2.0, h);
 
   printf("\n\n");
 
@@ -101,7 +101,7 @@ double h(double x)
 /*
  * outputs to the console the area under a graph with different numbers of intervals
 */
-void display_output(double a, double b, double (*f)(double x))
+void display_area(double a, double b, double (*f)(double x))
 {
   int i;
   int intervals[] = { 2, 4, 8, 16, 32, 64, 128 };
@@ -109,7 +109,7 @@ void display_output(double a, double b, double (*f)(double x))
 
   for (i = 0; i < num_intervals; i++)
   {
-    printf("\nArea: %f", trap(a, b, intervals[i], f));
+    printf("\nArea with %3d intervals: %f", intervals[i], trap(a, b, intervals[i], f));
   }
 }
 
