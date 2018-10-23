@@ -2,16 +2,26 @@
  * Programmer: Henrik A. Christensen     Date Completed: in progress
  * Instructor: Kurt Nørmark              Class:          Imperative Programming
  *
- * Coming soon...
+ * Create a program that calculate the area under a graph between x = a and x = b
+ * using the trapexoidal rule:
+ *      T = h / 2 * (f(a) + f(b) + 2 * SUM f(xi))     (SUM from i = 1 to n - 1)
+ *      h = (b - a) / n
+ *      g(x) = x^2 * sin(x)   (a = 0, b = 3.14159)
+ *      h(x) = sqrt(4 - x^2)  (a = -2, b = 2)
+ *
+ * Write a function trap with input parameters a, b, n, and f that implements the trapeziodal rule
+ * Call trap with values for n of 2, 4, 8, 16, 32, 64 and 128 on the functions g(x) and h(x)
+ *
+ * We will assume that f(x) is non-negative in the interval [a,b]
 */
 
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 
-#if defined(_WIN32) || defined(_WIN64)
+#if defined(_WIN32) || defined(_WIN64) /* if OS is Windows */
 #define CLEAR "cls"
-#else
+#else /* if OS is linux, apple etc... */
 #define CLEAR "clear"
 #endif
 
@@ -30,6 +40,9 @@ int main(void)
   printf("\n Area under graph\n");
   printf("===================\n\n");
 
+  printf("\tg(x) = x^2 * sin(x)");
+  printf("\n\th(x) = sqrt(4 - x^2)\n");
+
   printf("\nArea of g(x) from x = 0.0 to x = 3.14159\n");
   printf("----------------------------------------");
   display_output(0.0, 3.14159, g);
@@ -43,6 +56,9 @@ int main(void)
   return EXIT_SUCCESS;
 }
 
+/*
+ * calculate the area under a graph
+*/
 double trap(double a, double b, int n, double (*f)(double x))
 {
   double h = (b - a) / (double) n;
@@ -50,6 +66,9 @@ double trap(double a, double b, int n, double (*f)(double x))
   return (h / 2.0) * (f(a) + f(b) + 2.0 * sum(a, h, n, f));
 }
 
+/*
+ * calculate the sum from i = 1 to n - 1
+*/
 double sum(double a, double h, int n, double (*f)(double x))
 {
   int i;
@@ -63,25 +82,34 @@ double sum(double a, double h, int n, double (*f)(double x))
   return sum;
 }
 
+/*
+ * the function g(x)
+*/
 double g(double x)
 {
   return pow(x, 2.0) * sin(x);
 }
 
+/*
+ * the function h(x)
+*/
 double h(double x)
 {
   return sqrt(4 - pow(x, 2.0));
 }
 
+/*
+ * outputs to the console the area under a graph with different numbers of intervals
+*/
 void display_output(double a, double b, double (*f)(double x))
 {
   int i;
-  int slides[] = { 2, 4, 8, 16, 32, 64, 128 };
-  size_t num_slides = sizeof(slides) / sizeof(int);
+  int intervals[] = { 2, 4, 8, 16, 32, 64, 128 };
+  size_t num_intervals = sizeof(intervals) / sizeof(int);
 
-  for (i = 0; i < num_slides; i++)
+  for (i = 0; i < num_intervals; i++)
   {
-    printf("\nArea: %f", trap(a, b, slides[i], f));
+    printf("\nArea: %f", trap(a, b, intervals[i], f));
   }
 }
 
