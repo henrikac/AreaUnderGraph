@@ -109,7 +109,7 @@ void display_area(double a, double b, double (*f)(double x))
 
   for (i = 0; i < num_intervals; i++)
   {
-    printf("\nArea with %3d intervals: %f", intervals[i], trap(a, b, intervals[i], f));
+    printf("\nArea with %3d intervals:    %f", intervals[i], trap(a, b, intervals[i], f));
   }
 }
 
