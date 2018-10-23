@@ -9,30 +9,36 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#if defined(_WIN32) || defined(_WIN64)
+#define CLEAR "cls"
+#else
+#define CLEAR "clear"
+#endif
+
 double trap(double a, double b, int n, double (*f)(double x));
 double sum(double a, double h, int n, double (*f)(double x));
 double g(double x);
 double h(double x);
+void display_output(double a, double b, double (*f)(double x));
 
 int main(void)
 {
-  printf("\nG:");
-  printf("\nArea: %f", trap(0.0, 3.14159, 2, g));
-  printf("\nArea: %f", trap(0.0, 3.14159, 4, g));
-  printf("\nArea: %f", trap(0.0, 3.14159, 8, g));
-  printf("\nArea: %f", trap(0.0, 3.14159, 16, g));
-  printf("\nArea: %f", trap(0.0, 3.14159, 32, g));
-  printf("\nArea: %f", trap(0.0, 3.14159, 64, g));
-  printf("\nArea: %f", trap(0.0, 3.14159, 128, g));
+  /* clear console */
+  system(CLEAR);
 
-  printf("\n\nH:");
-  printf("\nArea: %f", trap(-2.0, 2.0, 2, h));
-  printf("\nArea: %f", trap(-2.0, 2.0, 4, h));
-  printf("\nArea: %f", trap(-2.0, 2.0, 8, h));
-  printf("\nArea: %f", trap(-2.0, 2.0, 16, h));
-  printf("\nArea: %f", trap(-2.0, 2.0, 32, h));
-  printf("\nArea: %f", trap(-2.0, 2.0, 64, h));
-  printf("\nArea: %f", trap(-2.0, 2.0, 128, h));
+  printf("===================");
+  printf("\n Area under graph\n");
+  printf("===================\n\n");
+
+  printf("\nArea of g(x) from x = 0.0 to x = 3.14159\n");
+  printf("----------------------------------------");
+  display_output(0.0, 3.14159, g);
+
+  printf("\n\nArea of h(x) from x = -2.0 to x = 2.0\n");
+  printf("-------------------------------------");
+  display_output(-2.0, 2.0, h);
+
+  printf("\n\n");
 
   return EXIT_SUCCESS;
 }
@@ -65,5 +71,17 @@ double g(double x)
 double h(double x)
 {
   return sqrt(4 - pow(x, 2.0));
+}
+
+void display_output(double a, double b, double (*f)(double x))
+{
+  int i;
+  int slides[] = { 2, 4, 8, 16, 32, 64, 128 };
+  size_t num_slides = sizeof(slides) / sizeof(int);
+
+  for (i = 0; i < num_slides; i++)
+  {
+    printf("\nArea: %f", trap(a, b, slides[i], f));
+  }
 }
 
