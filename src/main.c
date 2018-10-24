@@ -56,8 +56,13 @@ int main(void)
   return EXIT_SUCCESS;
 }
 
-/*
- * calculate the area under a graph
+/**
+ * Calculate the area under a graph
+ * @param[in] a The x = a value
+ * @param[in] b The x = b value
+ * @param[in] n The number of trapez
+ * @param[in] f The function to run
+ * @return The area under the graph
 */
 double trap(double a, double b, int n, double (*f)(double x))
 {
@@ -66,8 +71,13 @@ double trap(double a, double b, int n, double (*f)(double x))
   return (h / 2.0) * (f(a) + f(b) + 2.0 * sum(a, h, n, f));
 }
 
-/*
- * calculate the sum from i = 1 to n - 1
+/**
+ * Calculate the sum
+ * @param[in] a The x = a value
+ * @param[in] h The trapez width
+ * @param[in] n The number of trapez
+ * @param[in] f The function to run
+ * @return The sum from i = 1 to n - 1
 */
 double sum(double a, double h, int n, double (*f)(double x))
 {
@@ -82,24 +92,31 @@ double sum(double a, double h, int n, double (*f)(double x))
   return sum;
 }
 
-/*
- * the function g(x)
+/**
+ * The function g(x)
+ * @param[in] x The input to the function g.
+ * @return The value of the function
 */
 double g(double x)
 {
   return pow(x, 2.0) * sin(x);
 }
 
-/*
- * the function h(x)
+/**
+ * The function h(x)
+ * @param[in] x The input to the function h
+ * @return The value of the function
 */
 double h(double x)
 {
   return sqrt(4 - pow(x, 2.0));
 }
 
-/*
- * outputs to the console the area under a graph with different numbers of intervals
+/**
+ * Outputs to the console the area under a graph with different numbers of intervals
+ * @param[in] a The x = a value
+ * @param[in] b The x = b value
+ * @param[in] f The function to run
 */
 void display_area(double a, double b, double (*f)(double x))
 {
