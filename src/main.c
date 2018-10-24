@@ -1,5 +1,5 @@
 /*
- * Programmer: Henrik A. Christensen     Date Completed: in progress
+ * Programmer: Henrik A. Christensen     Date Completed: 24-10-2018
  * Instructor: Kurt Nørmark              Class:          Imperative Programming
  *
  * Create a program that calculate the area under a graph between x = a and x = b
@@ -36,9 +36,9 @@ int main(void)
   /* clear console */
   system(CLEAR);
 
-  printf("===================");
-  printf("\n Area under graph\n");
-  printf("===================\n\n");
+  printf("\t===================");
+  printf("\n\t Area under graph\n");
+  printf("\t===================\n\n");
 
   printf("\tg(x) = x^2 * sin(x)");
   printf("\n\th(x) = sqrt(4 - x^2)\n");
