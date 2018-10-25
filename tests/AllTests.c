@@ -4,6 +4,7 @@
 CuSuite *GGetSuite();
 CuSuite *HGetSuite();
 CuSuite *SumGetSuite();
+CuSuite *TrapGetSuite();
 
 void RunAllTests(void)
 {
@@ -13,6 +14,7 @@ void RunAllTests(void)
   CuSuiteAddSuite(suite, GGetSuite());
   CuSuiteAddSuite(suite, HGetSuite());
   CuSuiteAddSuite(suite, SumGetSuite());
+  CuSuiteAddSuite(suite, TrapGetSuite());
 
   CuSuiteRun(suite);
   CuSuiteSummary(suite, output);
