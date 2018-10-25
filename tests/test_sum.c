@@ -16,24 +16,46 @@ double sum(double a, double h, int n, double (*f)(double x))
   return sum;
 }
 
-void TestSum(CuTest *tc)
+void TestSum1(CuTest *tc)
 {
   double a = 0.0;
   double h = 1.0;
-  int n = 3;
+  int n = 2;
   double actual = sum(a, h, n, stub);
-  double expected = 2.0;
+  double expected = 1.0;
+  CuAssertDblEquals(tc, expected, actual, 0.1);
+}
+
+void TestSum2(CuTest *tc)
+{
+  double a = 0.0;
+  double h = 1.0;
+  int n = 32;
+  double actual = sum(a, h, n, stub);
+  double expected = 496.0;
+  CuAssertDblEquals(tc, expected, actual, 0.1);
+}
+
+void TestSum3(CuTest *tc)
+{
+  double a = 0.0;
+  double h = 1.0;
+  int n = 128;
+  double actual = sum(a, h, n, stub);
+  double expected = 8128.0;
   CuAssertDblEquals(tc, expected, actual, 0.1);
 }
 
 CuSuite *SumGetSuite()
 {
   CuSuite *suite = CuSuiteNew();
-  SUITE_ADD_TEST(suite, TestSum);
+  SUITE_ADD_TEST(suite, TestSum1);
+  SUITE_ADD_TEST(suite, TestSum2);
+  SUITE_ADD_TEST(suite, TestSum3);
   return suite;
 }
 
 double stub(double x)
 {
-  return 1.0;
+  return x;
 }
